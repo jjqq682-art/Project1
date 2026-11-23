@@ -1,11 +1,40 @@
-<div align="center">
+# 북퀘스트 (BookQuest) — 기분 맞춤 문학 RPG 서재
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+지금의 기분 상태에 맞춰 책을 추천받고, 책의 줄거리 도입부와 난이도를 게임처럼 체험할 수 있는 인터랙티브 독서 웹 애플리케이션입니다.
 
-  <h1>Built with AI Studio</h2>
+## 주요 기능
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+- **기분 조율소 & AI 맞춤 추천**: 6가지 기분 프리셋, 마음의 에너지·감정 온도 슬라이더, 독서 체력(난이도), 자유 메모를 바탕으로 Gemini API가 실제 도서 3권을 RPG 퀘스트 카드로 추천합니다.
+- **봉인된 퀘스트 카드 & 4대 능력치 레이더**: 추천된 카드를 3D 플립 모션으로 직접 열어보며, 몰입도·사유력·감정 파동·어휘 밀도를 SVG 레이더 차트로 확인할 수 있습니다.
+- **스포일러 없는 분기형 줄거리 퀘스트**: 책의 도입부를 바탕으로 2단계 선택지를 플레이하고 운명 주사위(d20) 판정을 거쳐 책과의 공명도를 측정합니다.
+- **집중 독서 타이머 & 보스전**: 1~120분 자유 설정 타이머와 빗소리 배경음(Web Audio API)을 지원하며, 독서 완료 시 책의 던전 보스 HP를 깎아 완독 아티팩트를 해금할 수 있습니다.
+- **모험가 업적 & 등급 시스템**: 퀘스트 수락, 줄거리 체험, 보스 공략, 완독에 따라 경험치(XP)와 탐독가 등급(`Lv.1 견습 탐독가` ~ `Lv.5 만권의 현자`)이 성장합니다.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## 기술 스택
 
-</div>
+- **Frontend**: React 19, TypeScript, Tailwind CSS v4, Motion (`motion/react`), Lucide Icons
+- **Backend**: Express, Vite Middleware (`tsx`), `@google/genai`
+
+## 로컬 실행 방법
+
+1. **의존성 설치**
+   ```bash
+   npm install
+   ```
+
+2. **환경 변수 설정**
+   ```bash
+   cp .env.example .env
+   ```
+   `.env` 파일의 `GEMINI_API_KEY` 항목에 발급받은 Google Gemini API 키를 입력합니다.
+
+3. **개발 서버 실행**
+   ```bash
+   npm run dev
+   ```
+   브라우저에서 `http://localhost:3000`으로 접속합니다.
+
+4. **프로덕션 빌드**
+   ```bash
+   npm run build
+   ```

@@ -1,0 +1,6 @@
+{
+  "name": "북퀘스트 — 기분의 서재",
+  "description": "지금의 기분 상태에 맞춰 책을 추천하고, 분기형 줄거리 체험과 던전 난이도 시스템으로 독서를 모험처럼 즐기는 인터랙티브 서재입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
