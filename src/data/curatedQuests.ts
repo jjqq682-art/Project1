@@ -1,12 +1,15 @@
 import { BookQuest, CoverTheme, ReadingStamina } from '../types/quest';
+import heroTabletopImg from '../assets/images/tabletop_hero_atlas_1795398029030.jpg';
+import coverDreamImg from '../assets/images/quest_cover_dream_1795398029205.jpg';
+import coverSolitudeImg from '../assets/images/quest_cover_solitude_1795398030776.jpg';
+import coverLabyrinthImg from '../assets/images/quest_cover_labyrinth_1795398029689.jpg';
 
-export const HERO_TABLETOP_IMAGE =
-  '/src/assets/images/tabletop_hero_atlas_1795398029030.jpg';
+export const HERO_TABLETOP_IMAGE = heroTabletopImg;
 
 export const COVER_IMAGES: Record<CoverTheme, string> = {
-  dream: '/src/assets/images/quest_cover_dream_1795398029205.jpg',
-  solitude: '/src/assets/images/quest_cover_solitude_1795398030776.jpg',
-  labyrinth: '/src/assets/images/quest_cover_labyrinth_1795398029689.jpg',
+  dream: coverDreamImg,
+  solitude: coverSolitudeImg,
+  labyrinth: coverLabyrinthImg,
 };
 
 export interface MoodPreset {
@@ -685,4 +688,302 @@ export const CURATED_QUESTS: BookQuest[] = [
         '회색 신사들의 추격을 피해 모모는 도시의 잃어버린 시간들을 되찾을 수 있을까요? 어른이 되어서 읽으면 더욱 깊이 울리는 마법 같은 이야기가 기다립니다.',
     },
   },
+  {
+    id: 'curated-almond',
+    title: '아몬드',
+    author: '손원평',
+    genre: '성장 심리 소설',
+    dungeonName: '감정이 잠든 아몬드의 미로',
+    dungeonRank: 'Lv.1 산책로',
+    difficultyScore: 28,
+    estimatedHours: 4,
+    pages: 264,
+    moodTags: ['공감', '성찰', '빠른 몰입'],
+    moodMatchReason:
+      '감정의 무게에 지치거나 관계의 온도가 낯설게 느껴질 때, 오히려 감정을 느끼지 못하는 소년의 시선을 통해 ‘마음이 움직인다’는 것의 의미를 선명하게 보여줍니다.',
+    stats: {
+      immersion: 93,
+      depth: 76,
+      lexicon: 32,
+      resonance: 90,
+    },
+    bossChallenge: {
+      name: '타인의 시선이라는 편견의 벽',
+      description: '세상이 정한 평범함의 틀 밖에서도 스스로의 방식으로 누군가를 구하고 이해하려는 용기를 시험받습니다.',
+    },
+    recommendedBuff: '레몬티 + 조용한 밤 산책 후 침대 스탠드 (몰입도 +20%)',
+    coverTheme: 'solitude',
+    relicReward: {
+      name: '작은 가죽 표지 수첩',
+      iconType: 'feather',
+      quote: '멀리서 보면 비극이지만 가까이서 보면 희극이 아니라, 누구도 함부로 정의할 수 없는 삶이 있다.',
+    },
+    plotQuest: {
+      prologue:
+        '선천적으로 뇌의 편도체가 작아 공포도 분노도 잘 느끼지 못하는 소년 윤재. 할머니와 엄마의 세심한 돌봄 속에서 감정을 학습하던 어느 크리스마스이브, 평온했던 일상이 한순간에 무너집니다.',
+      stages: [
+        {
+          prompt: '홀로 남게 된 윤재 앞에 거칠고 공격적인 소년 ‘곤이’가 나타납니다. 감정을 읽지 못하는 당신은 어떻게 마주하겠습니까?',
+          choiceA: {
+            label: '주먹을 휘두르려는 곤이의 눈을 흔들림 없이 담담하게 마주 본다',
+            outcome:
+              '겁먹지도 화내지도 않는 윤재의 기묘한 평온함 앞에서, 곤이의 분노는 오히려 방향을 잃고 멈춰 섭니다.',
+            resonanceDelta: 24,
+          },
+          choiceB: {
+            label: '그가 왜 그렇게까지 화가 나 있는지 한 발 물러서서 관찰한다',
+            outcome:
+              '겉으로 드러난 거친 말투 뒤에 숨어 있는 상처의 모양이 서서히 윤재의 눈에 들어오기 시작합니다.',
+            resonanceDelta: 21,
+          },
+        },
+        {
+          prompt: '조금씩 가까워진 두 소년에게 위험한 위기가 찾아옵니다. 지금 당신의 마음을 움직이는 것은 무엇입니까?',
+          choiceA: {
+            label: '이유를 설명할 수 없지만, 곤이를 구하기 위해 망설임 없이 몸을 움직인다',
+            outcome:
+              '머리로 배운 감정이 아니라 몸이 먼저 반응한 순간, 아몬드처럼 굳어 있던 내면에 미세한 균열이 생깁니다.',
+            resonanceDelta: 27,
+          },
+          choiceB: {
+            label: '할머니가 적어주신 감정 단어를 떠올리며 지금의 느낌에 이름을 붙인다',
+            outcome:
+              '두려움과 걱정이라는 낯선 감각이 처음으로 싹트며 이야기의 심장이 힘차게 뛰기 시작합니다.',
+            resonanceDelta: 23,
+          },
+        },
+      ],
+      climaxHook:
+        '느끼지 못하던 소년이 누군가를 위해 위험 속으로 걸어 들어갈 때, 과연 그의 마음속에서는 어떤 기적이 피어날까요?',
+    },
+  },
+  {
+    id: 'curated-dallergut',
+    title: '달러구트 꿈 백화점',
+    author: '이미예',
+    genre: '힐링 판타지',
+    dungeonName: '잠든 자들이 드나드는 5층 백화점',
+    dungeonRank: 'Lv.1 산책로',
+    difficultyScore: 24,
+    estimatedHours: 5,
+    pages: 300,
+    moodTags: ['몽환', '따뜻한 위로', '휴식'],
+    moodMatchReason:
+      '잠들기 전 머릿속의 걱정을 잠시 내려놓고, 다정하고 기발한 상상력 속에서 기분 좋은 꿈을 꾸듯 쉬어가고 싶은 밤에 가장 잘 어울립니다.',
+    stats: {
+      immersion: 90,
+      depth: 62,
+      lexicon: 28,
+      resonance: 88,
+    },
+    bossChallenge: {
+      name: '잠들지 못하는 새벽의 잡념',
+      description: '현실의 피로를 잠시 문 밖에 두고 몽환적인 꿈의 진열대 앞에 설 수 있는 여유를 회복해야 합니다.',
+    },
+    recommendedBuff: '따뜻한 캐모마일 차 + 포근한 담요 (수면 직전 평온 +25%)',
+    coverTheme: 'dream',
+    relicReward: {
+      name: '별빛이 담긴 꿈 유리병',
+      iconType: 'moon',
+      quote: '잠든 시간은 낭비가 아니라, 깨어 있는 나를 다시 사랑하기 위해 건너가는 다리다.',
+    },
+    plotQuest: {
+      prologue:
+        '잠들어야만 입장할 수 있는 신비한 마을 한가운데, 온갖 꿈을 진열해 파는 ‘달러구트 꿈 백화점’이 있습니다. 신입 직원 페니는 오늘 밤 손님들에게 가장 알맞은 꿈을 골라주어야 합니다.',
+      stages: [
+        {
+          prompt: '자정이 넘은 시각, 지친 표정의 손님이 백화점 1층에 들어섰습니다. 어떤 꿈을 권해드리겠습니까?',
+          choiceA: {
+            label: '그리운 사람과 아무 걱정 없이 차를 마시는 재회의 꿈을 꺼내 보인다',
+            outcome:
+              '유리병이 은은한 금빛으로 빛나며 손님의 굳어 있던 어깨가 사르르 풀립니다.',
+            resonanceDelta: 24,
+          },
+          choiceB: {
+            label: '푸른 하늘 위를 자유롭게 날아다니는 비상의 꿈을 추천한다',
+            outcome:
+              '청량한 바람의 감촉이 손님의 마음에 스며들며 내일을 살아갈 산뜻한 활력이 피어납니다.',
+            resonanceDelta: 22,
+          },
+        },
+        {
+          prompt: '꿈값을 계산하는 카운터에서 손님은 잠에서 깬 뒤 느낀 ‘감정’으로 대금을 치릅니다.',
+          choiceA: {
+            label: '손님이 남기고 간 따뜻한 설렘과 여운을 조심스레 병에 담는다',
+            outcome:
+              '백화점 장부에 반짝이는 기록이 남고, 이곳이 단순한 상점이 아닌 마음의 치유소임을 깨닫습니다.',
+            resonanceDelta: 25,
+          },
+          choiceB: {
+            label: '가장 잘 팔리는 인기 꿈 제작자 ‘야스누즈’의 비밀 작업실을 엿본다',
+            outcome:
+              '사람들이 왜 하필 그토록 이상하고 아련한 꿈을 찾는지 놀라운 비밀이 밝혀집니다.',
+            resonanceDelta: 23,
+          },
+        },
+      ],
+      climaxHook:
+        '오늘 밤 당신이 잠든 사이, 달러구트 백화점의 5층 창고에서는 어떤 특별한 꿈이 당신을 기다리고 있을까요?',
+    },
+  },
+  {
+    id: 'curated-little-prince',
+    title: '어린 왕자',
+    author: '앙투안 드 생텍쥐페리',
+    genre: '철학 동화 고전',
+    dungeonName: '소행성 B612와 사막의 별빛',
+    dungeonRank: 'Lv.2 안개 숲',
+    difficultyScore: 40,
+    estimatedHours: 3,
+    pages: 144,
+    moodTags: ['순수', '사색', '그리움'],
+    moodMatchReason:
+      '어른이 되며 무뎌진 감각을 다시 맑게 닦아내고, 내가 진심으로 ‘길들인’ 소중한 관계와 본질을 조용히 떠올리고 싶을 때 딱 맞는 책입니다.',
+    stats: {
+      immersion: 84,
+      depth: 88,
+      lexicon: 38,
+      resonance: 96,
+    },
+    bossChallenge: {
+      name: '숫자와 소유에만 집착하는 어른의 시선',
+      description: '눈에 보이지 않는 마음의 가치를 가볍게 여기는 세속의 논리를 벗어나 별이 웃는 소리를 들을 줄 알아야 합니다.',
+    },
+    recommendedBuff: '은은한 밤 하늘 플레이리스트 + 따뜻한 우유 한 잔 (순수 회복 +30%)',
+    coverTheme: 'solitude',
+    relicReward: {
+      name: '사막 여우의 황금빛 밀밭',
+      iconType: 'lantern',
+      quote: '가장 중요한 것은 눈에 보이지 않아. 오직 마음으로 보아야만 잘 볼 수 있어.',
+    },
+    plotQuest: {
+      prologue:
+        '사하라 사막 한가운데 비행기가 불시착한 밤, 지친 조종사 앞에 먼 별에서 온 작은 소년이 나타나 "양 한 마리만 그려줘"라고 부탁합니다.',
+      stages: [
+        {
+          prompt: '어린 왕자가 자신이 떠나온 작은 별의 장미꽃 이야기를 들려줍니다. 어떤 질문으로 대화를 이어가겠습니까?',
+          choiceA: {
+            label: '까다롭고 도도한 그 장미꽃을 왜 그토록 떠나기 아쉬워했는지 묻는다',
+            outcome:
+              '왕자는 잠시 침묵하더니, 물을 주고 유리 덮개를 씌워주던 시간 자체가 꽃을 특별하게 만들었다고 고백합니다.',
+            resonanceDelta: 26,
+          },
+          choiceB: {
+            label: '사막에서 만난 여우가 가르쳐준 ‘길들인다’는 말의 뜻을 묻는다',
+            outcome:
+              '세상에 수만 송이의 장미가 있어도, 내가 시간을 들인 단 한 송이만이 유일해진다는 진실이 가슴을 울립니다.',
+            resonanceDelta: 25,
+          },
+        },
+        {
+          prompt: '사막의 목마름 속에서 마침내 두 사람은 별빛 아래 숨겨진 오래된 우물을 찾아냅니다.',
+          choiceA: {
+            label: '두레박에 담긴 물 한 모금이 왜 그토록 달콤한지 조용히 음미한다',
+            outcome:
+              '밤하늘 아래 함께 걸었던 발걸음과 마음이 그 물에 담겨 있음을 깨닫습니다.',
+            resonanceDelta: 27,
+          },
+          choiceB: {
+            label: '이제 별으로 돌아가야 할 왕자의 마지막 선택을 묵묵히 지켜본다',
+            outcome:
+              '슬픔 속에서도 밤하늘의 모든 별이 방울처럼 웃을 것이라는 약속이 마음속에 별빛처럼 남습니다.',
+            resonanceDelta: 24,
+          },
+        },
+      ],
+      climaxHook:
+        '어릴 적 읽었을 때와는 전혀 다른 문장으로 다가오는 어른을 위한 동화, 오늘 밤 하늘의 별 하나를 마음속에 켜보세요.',
+    },
+  },
+  {
+    id: 'curated-1984',
+    title: '1984',
+    author: '조지 오웰',
+    genre: '디스토피아 고전',
+    dungeonName: '빅 브라더의 감시탑과 101호실',
+    dungeonRank: 'Lv.4 바벨의 탑',
+    difficultyScore: 84,
+    estimatedHours: 12,
+    pages: 420,
+    moodTags: ['긴장감', '지적 각성', '몰입'],
+    moodMatchReason:
+      '안온한 이야기보다 심장을 조이는 긴장감과 날카로운 사회·철학적 통찰로 정신이 번쩍 드는 강렬한 독서를 원할 때 최고의 선택입니다.',
+    stats: {
+      immersion: 88,
+      depth: 95,
+      lexicon: 72,
+      resonance: 86,
+    },
+    bossChallenge: {
+      name: '이중사고와 진실부의 기억 조작',
+      description: '언어와 역사마저 통제되는 거대한 전체주의 시스템 속에서 개인의 진실과 기억을 끝까지 지켜내야 합니다.',
+    },
+    recommendedBuff: '진한 블랙커피 + 팽팽한 긴장감을 주는 앰비언트 사운드 (집중력 +25%)',
+    coverTheme: 'labyrinth',
+    relicReward: {
+      name: '금지된 유리 문진',
+      iconType: 'key',
+      quote: '자유란 둘 더하기 둘이 넷이라고 말할 수 있는 자유다.',
+    },
+    plotQuest: {
+      prologue:
+        '거대한 스크린 ‘텔레스크린’이 모든 집 안을 감시하는 오세아니아. 진실부 말단 공무원 윈스턴 스미스는 사각지대 구석에서 금지된 공책을 펼치고 몰래 일기를 쓰기 시작합니다.',
+      stages: [
+        {
+          prompt: '동료 여성 줄리아가 당신의 손에 몰래 접힌 쪽지 하나를 쥐여주었습니다. 사상경찰의 눈을 피해 어떻게 행동하겠습니까?',
+          choiceA: {
+            label: '숨 막히는 감시망을 뚫고 인적 드문 숲속 비밀 장소에서 그녀를 만난다',
+            outcome:
+              '회색빛 도시 바깥의 짧은 자유 속에서, 억압된 인간성이 얼마나 강렬하게 살아 숨 쉬는지 체감합니다.',
+            resonanceDelta: 25,
+          },
+          choiceB: {
+            label: '골동품 상점 위층의 텔레스크린 없는 작은 방을 은신처로 삼는다',
+            outcome:
+              '유리 문진 속 산호처럼 아늑한 공간에서 두 사람은 시스템에 균열을 내는 위험한 저항을 꿈꿉니다.',
+            resonanceDelta: 24,
+          },
+        },
+        {
+          prompt: '고위 간부 오브라이언이 비밀 저항 조직의 금서 ‘골드스타인의 책’을 건네주겠다는 신호를 보냅니다.',
+          choiceA: {
+            label: '체포의 위험을 감수하고서라도 진실이 적힌 금서의 문을 연다',
+            outcome:
+              '권력이 왜 권력을 유지하려 하는지, 서늘하고 소름 돋는 통찰의 실체가 눈앞에 드러납니다.',
+            resonanceDelta: 28,
+          },
+          choiceB: {
+            label: '그의 눈빛 속에 숨은 의도가 진짜 동지애인지 냉정하게 의심한다',
+            outcome:
+              '누구도 믿을 수 없는 세계의 긴장감이 최고조에 달하며 책에서 눈을 뗄 수 없게 됩니다.',
+            resonanceDelta: 26,
+          },
+        },
+      ],
+      climaxHook:
+        '감시와 언어 조작의 끝에서 윈스턴을 기다리는 ‘101호실’의 정체는 무엇일까요? 단 한 번 읽으면 평생 잊히지 않을 압도적인 디스토피아가 열립니다.',
+    },
+  },
 ];
+
+export function getMoodMatchedCuratedQuests(
+  energy: number,
+  warmth: number,
+  stamina: ReadingStamina,
+  count = 3
+): BookQuest[] {
+  const targetDifficulty =
+    stamina === 'light' ? 30 : stamina === 'balanced' ? 54 : 82;
+
+  const scored = CURATED_QUESTS.map((q) => {
+    const warmthScore = 100 - Math.abs(warmth - q.stats.resonance);
+    const energyScore = 100 - Math.abs(energy - q.stats.immersion);
+    const diffScore = 100 - Math.abs(targetDifficulty - q.difficultyScore);
+    const total = warmthScore * 0.4 + energyScore * 0.35 + diffScore * 0.25;
+    return { quest: q, score: total };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, count).map((entry) => entry.quest);
+}
+

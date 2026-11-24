@@ -27,6 +27,7 @@ import {
   CURATED_QUESTS,
   HERO_TABLETOP_IMAGE,
   MOOD_PRESETS,
+  getMoodMatchedCuratedQuests,
   getReaderRank,
 } from './data/curatedQuests';
 import {
@@ -307,21 +308,18 @@ export default function App() {
 
   const readerRank = useMemo(() => getReaderRank(progress.xp), [progress.xp]);
 
-  const bestCuratedMatch = useMemo(() => {
-    const targetDifficulty =
-      mood.stamina === 'light' ? 30 : mood.stamina === 'balanced' ? 55 : 82;
+  const matchedCuratedQuests = useMemo(
+    () =>
+      getMoodMatchedCuratedQuests(
+        mood.energy,
+        mood.warmth,
+        mood.stamina,
+        3
+      ),
+    [mood.energy, mood.warmth, mood.stamina]
+  );
 
-    const scored = CURATED_QUESTS.map((q) => {
-      const warmthScore = 100 - Math.abs(mood.warmth - q.stats.resonance);
-      const energyScore = 100 - Math.abs(mood.energy - q.stats.immersion);
-      const diffScore = 100 - Math.abs(targetDifficulty - q.difficultyScore);
-      const total = warmthScore * 0.4 + energyScore * 0.35 + diffScore * 0.25;
-      return { quest: q, score: total };
-    });
-
-    scored.sort((a, b) => b.score - a.score);
-    return scored[0]?.quest ?? CURATED_QUESTS[0];
-  }, [mood]);
+  const bestCuratedMatch = matchedCuratedQuests[0] ?? CURATED_QUESTS[0];
 
   const filteredCatalog = useMemo(() => {
     const base =
@@ -379,12 +377,18 @@ export default function App() {
       });
 
       const rawBody = await response.text();
+      if (response.status === 404 || response.status === 405) {
+        throw new Error(
+          '정적 호스팅(GitHub Pages 등) 환경에서는 백엔드 AI 추천 API가 실행되지 않습니다. 아래의 실시간 기분 매칭 큐레이션 퀘스트를 바로 플레이해 보세요.'
+        );
+      }
+
       let data: { error?: string; moodSummary?: string; quests?: BookQuest[] } = {};
       try {
         data = rawBody ? JSON.parse(rawBody) : {};
       } catch {
         throw new Error(
-          `서버 응답을 읽는 중 오류가 발생했습니다 (HTTP ${response.status}). 잠시 후 다시 시도해 주세요.`
+          `백엔드 API 응답이 올바르지 않습니다 (HTTP ${response.status}). 정적 호스팅 환경이라면 아래 큐레이션 퀘스트를 이용해 주세요.`
         );
       }
 
@@ -1116,7 +1120,7 @@ export default function App() {
                 </div>
               )}
 
-              {aiQuests.length > 0 && (
+              {aiQuests.length > 0 ? (
                 <section ref={resultsRef} id="section-results" className="space-y-6 pt-2">
                   <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#F5F1E6]/12 pb-4">
                     <div className="space-y-1">
@@ -1162,6 +1166,43 @@ export default function App() {
                         quest={quest}
                         isRevealed={revealedIds.includes(quest.id)}
                         onReveal={() => handleRevealCard(quest.id)}
+                        isAccepted={acceptedIdSet.has(quest.id)}
+                        isPreviewCompleted={completedPreviewSet.has(quest.id)}
+                        onOpenEncounter={(q) => {
+                          soundFx.cardDraw(progress.soundEnabled);
+                          setActiveEncounterQuest(q);
+                        }}
+                        onAcceptQuest={handleAcceptQuest}
+                      />
+                    ))}
+                  </div>
+                </section>
+              ) : (
+                <section id="section-results" className="space-y-6 pt-2">
+                  <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#F5F1E6]/12 pb-4">
+                    <div className="space-y-1">
+                      <h2 className="text-2xl font-bold text-[#FAF7F0]">
+                        지금 기분 공명 추천 퀘스트 (3권)
+                      </h2>
+                      <p className="text-sm text-[#C7C1B2]">
+                        선택하신「{mood.presetLabel} · {staminaLabels[mood.stamina]}」에 가장 잘 맞는 책 3권입니다. 슬라이더를 움직이면 즉시 바뀝니다.
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleSwitchTab('catalog')}
+                      className="px-4 py-2 text-xs font-medium rounded-lg border border-[#F5F1E6]/20 bg-[#15241E] text-[#FAF7F0] hover:border-amber-400/60 transition-colors cursor-pointer whitespace-nowrap"
+                    >
+                      전체 도감 12권 보기
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {matchedCuratedQuests.map((quest) => (
+                      <QuestCard
+                        key={quest.id}
+                        quest={quest}
                         isAccepted={acceptedIdSet.has(quest.id)}
                         isPreviewCompleted={completedPreviewSet.has(quest.id)}
                         onOpenEncounter={(q) => {
@@ -1322,16 +1363,7 @@ export default function App() {
       <footer className="border-t border-[#F5F1E6]/10 mt-12">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4 text-xs text-[#8F897B]">
           <span>북퀘스트 — 기분 맞춤 문학 탐험 서재</span>
-          <div className="flex flex-wrap items-center gap-5">
-            <a
-              href="/api/download-github-zip"
-              download="bookquest-github.zip"
-              className="text-amber-400/90 hover:text-amber-300 hover:underline underline-offset-4 transition-colors"
-            >
-              GitHub용 소스 ZIP 다운로드
-            </a>
-            <span>진행 기록과 업적은 이 브라우저에 저장됩니다.</span>
-          </div>
+          <span>진행 기록과 업적은 이 브라우저에 저장됩니다.</span>
         </div>
       </footer>
 

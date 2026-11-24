@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express from 'express';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI, ThinkingLevel, Type } from '@google/genai';
@@ -286,15 +285,6 @@ function sanitizeQuest(q: Record<string, unknown>, idx: number) {
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true });
-});
-
-app.get('/api/download-github-zip', (_req, res) => {
-  const zipPath = path.resolve(__dirname, 'bookquest-github.zip');
-  if (!fs.existsSync(zipPath)) {
-    res.status(404).json({ error: 'ZIP 파일을 찾을 수 없습니다.' });
-    return;
-  }
-  res.download(zipPath, 'bookquest-github.zip');
 });
 
 app.post('/api/recommend', async (req, res) => {
