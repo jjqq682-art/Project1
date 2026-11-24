@@ -15,7 +15,34 @@
 - **Frontend**: React 19, TypeScript, Tailwind CSS v4, Motion (`motion/react`), Lucide Icons
 - **Backend**: Express, Vite Middleware (`tsx`), `@google/genai`
 
-## 로컬 실행 방법
+---
+
+## GitHub로 전체 프로젝트 옮기기
+
+내려받은 `bookquest-github.zip` 압축을 풀면 전체 소스 코드, 이미지 에셋, 설정 파일이 모두 들어 있습니다.
+
+### 방법 1: Git CLI로 올리기 (권장 — 숨김 파일 포함 전체 반영)
+
+압축을 푼 폴더에서 터미널을 열고 아래 명령어를 순서대로 실행하세요.
+
+```bash
+git init
+git add .
+git commit -m "Initial commit: BookQuest"
+git branch -M main
+git remote add origin https://github.com/<내_깃허브_아이디>/<저장소_이름>.git
+git push -u origin main
+```
+
+### 방법 2: GitHub 웹 화면에서 올리기
+
+1. GitHub에서 새 Repository를 생성합니다.
+2. 저장소 화면의 **uploading an existing file** (또는 **Add file > Upload files**)를 클릭합니다.
+3. 압축을 푼 폴더 안의 모든 파일(`src`, `server.ts`, `package.json`, `index.html`, `.github`, `.gitignore`, `.env.example` 등)을 드래그 앤 드롭한 뒤 **Commit changes**를 누릅니다.
+
+---
+
+## 로컬 실행 방법 (Node.js 20+ / 22 권장)
 
 1. **의존성 설치**
    ```bash
@@ -34,7 +61,8 @@
    ```
    브라우저에서 `http://localhost:3000`으로 접속합니다.
 
-4. **프로덕션 빌드**
+4. **프로덕션 빌드 및 실행**
    ```bash
    npm run build
+   NODE_ENV=production npm start
    ```
