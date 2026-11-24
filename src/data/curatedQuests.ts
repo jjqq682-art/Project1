@@ -100,7 +100,7 @@ export const ACHIEVEMENTS = [
   {
     id: 'first-mood-oracle',
     title: '감정의 조율사',
-    description: 'AI 기분 맞춤 북퀘스트를 1회 이상 의뢰했습니다.',
+    description: '기분 맞춤 퀘스트 카드 3장을 1회 이상 뽑았습니다.',
     xpReward: 40,
   },
   {
@@ -964,26 +964,564 @@ export const CURATED_QUESTS: BookQuest[] = [
         '감시와 언어 조작의 끝에서 윈스턴을 기다리는 ‘101호실’의 정체는 무엇일까요? 단 한 번 읽으면 평생 잊히지 않을 압도적인 디스토피아가 열립니다.',
     },
   },
+  {
+    id: 'curated-namiya',
+    title: '나미야 잡화점의 기적',
+    author: '히가시노 게이고',
+    genre: '미스터리 힐링',
+    dungeonName: '32년 전 편지가 닿는 낡은 잡화점',
+    dungeonRank: 'Lv.1 산책로',
+    difficultyScore: 30,
+    estimatedHours: 6,
+    pages: 456,
+    moodTags: ['따뜻함', '미스터리', '인연'],
+    moodMatchReason:
+      '마음이 헛헛하거나 누군가의 진심 어린 조언이 필요할 때, 시간을 건너 이어지는 따뜻한 편지들이 촘촘한 퍼즐처럼 마음을 채워줍니다.',
+    stats: {
+      immersion: 94,
+      depth: 72,
+      lexicon: 30,
+      resonance: 92,
+    },
+    bossChallenge: {
+      name: '엇갈린 시간 속의 미완성 편지',
+      description: '우유 상자에 도착하는 과거의 고민들 사이에서 숨겨진 인연의 실타래를 끝까지 놓치지 말아야 합니다.',
+    },
+    recommendedBuff: '따뜻한 우유 + 비 오는 밤의 우체통 감성 (몰입도 +22%)',
+    coverTheme: 'dream',
+    relicReward: {
+      name: '낡은 셔터 틈의 답장 봉투',
+      iconType: 'key',
+      quote: '아무리 하찮은 고민이라도, 진심으로 귀 기울이는 순간 기적은 시작된다.',
+    },
+    plotQuest: {
+      prologue:
+        '어느 날 밤, 낡고 문 닫은 잡화점에 숨어든 세 명의 빈집털이 청년 앞에 셔터 틈으로 32년 전에서 온 고민 상담 편지가 뚝 떨어집니다.',
+      stages: [
+        {
+          prompt: '편지에는 시한부 연인과 올림픽 꿈 사이에서 괴로워하는 여성의 절박한 사연이 적혀 있습니다. 장난으로 넘길 수도 있는 상황, 어떻게 하겠습니까?',
+          choiceA: {
+            label: '서툰 글씨라도 진심을 담아 편지지 위에 조심스레 답장을 써 내려간다',
+            outcome:
+              '우유 상자 속에 답장을 넣자마자 바람 소리가 스치고, 과거의 운명이 미세하게 방향을 틀기 시작합니다.',
+            resonanceDelta: 24,
+          },
+          choiceB: {
+            label: '왜 이런 기이한 일이 일어나는지 잡화점 주인 할아버지의 옛 기억을 추리한다',
+            outcome:
+              '과거와 현재를 잇는 절묘한 시간의 연결고리가 하나씩 맞춰지며 소름 돋는 전율이 흐릅니다.',
+            resonanceDelta: 22,
+          },
+        },
+        {
+          prompt: '두 번째 편지가 도착하며, 이 작은 잡화점이 동네 사람들의 인생을 어떻게 바꾸어 놓았는지 드러납니다.',
+          choiceA: {
+            label: '겉돌던 인물들의 이야기가 하나의 궤도로 만나는 순간을 지켜본다',
+            outcome:
+              '흩어져 있던 작은 선의들이 거대한 기적의 그물로 엮이는 따뜻한 카타르시스가 밀려옵니다.',
+            resonanceDelta: 26,
+          },
+          choiceB: {
+            label: '백지 편지를 넣으면 어떤 답이 돌아올지 마지막 밤을 기다린다',
+            outcome:
+              '동이 트기 전 마지막 우유 상자 앞에서 삶의 방향을 비추는 다정한 한 문장을 마주하게 됩니다.',
+            resonanceDelta: 25,
+          },
+        },
+      ],
+      climaxHook:
+        '다섯 개의 사연이 마침내 하나의 기적으로 이어지는 순간, 당신의 오늘 고민에도 따뜻한 답장이 도착할지 모릅니다.',
+    },
+  },
+  {
+    id: 'curated-contradiction',
+    title: '모순',
+    author: '양귀자',
+    genre: '한국 현대 소설',
+    dungeonName: '이모와 엄마, 두 갈래의 인생 회랑',
+    dungeonRank: 'Lv.2 안개 숲',
+    difficultyScore: 48,
+    estimatedHours: 5,
+    pages: 308,
+    moodTags: ['성장', '인생 사색', '공감'],
+    moodMatchReason:
+      '삶의 선택 앞에서 정답을 몰라 막막하거나 청춘의 엇갈린 감정들을 가감 없이 들여다보고 싶은 날, 첫 문장부터 단숨에 사로잡힙니다.',
+    stats: {
+      immersion: 87,
+      depth: 86,
+      lexicon: 48,
+      resonance: 91,
+    },
+    bossChallenge: {
+      name: '이해할 수 없는 선택들의 역설',
+      description: '합리성만으로는 재단할 수 없는 사랑과 인생의 모순적인 결들을 있는 그대로 끌어안는 시선이 필요합니다.',
+    },
+    recommendedBuff: '진한 카페라떼 + 조용한 저녁 창가 (성찰력 +20%)',
+    coverTheme: 'solitude',
+    relicReward: {
+      name: '스물다섯의 빨간 수첩',
+      iconType: 'feather',
+      quote: '인생은 탐구하면서 살아가는 것이 아니라, 살아가면서 탐구하는 것이다.',
+    },
+    plotQuest: {
+      prologue:
+        '스물다섯 살 안진진은 일란성 쌍둥이이지만 정반대의 삶을 산 어머니와 이모 사이에서, 전혀 다른 매력의 두 남자를 동시에 마주하게 됩니다.',
+      stages: [
+        {
+          prompt: '고달프지만 생의 활력이 넘치는 엄마의 삶과, 우아하지만 어딘가 공허한 이모의 삶. 당신은 어떤 시선으로 두 사람을 바라보겠습니까?',
+          choiceA: {
+            label: '아무 일 없는 평온함 뒤에 숨어 있는 이모의 고독한 그림자를 살핀다',
+            outcome:
+              '행복의 겉모습과 내면의 온도 차를 깨달으며 인생을 바라보는 눈이 한층 깊어집니다.',
+            resonanceDelta: 24,
+          },
+          choiceB: {
+            label: '고단해도 살아있음을 부딪치며 버텨내는 엄마의 생명력에 귀 기울인다',
+            outcome:
+              '상처와 결핍조차 사람을 살게 하는 역설적인 힘이라는 진실이 가슴에 묵직하게 닿습니다.',
+            resonanceDelta: 25,
+          },
+        },
+        {
+          prompt: '안정적인 미래를 약속하는 나영규와, 이유 없이 마음이 흔들리는 김장우가 동시에 당신 앞에 서 있습니다.',
+          choiceA: {
+            label: '예측 가능한 삶의 질서 대신 이해할 수 없는 감정의 파동을 응시한다',
+            outcome:
+              '합리적인 계산을 비껴가는 마음의 움직임 속에서 진짜 자기 자신의 모습을 마주합니다.',
+            resonanceDelta: 26,
+          },
+          choiceB: {
+            label: '두 선택 모두에 숨어 있는 위험과 모순을 담담하게 노트에 적는다',
+            outcome:
+              '타인의 시선이 아닌 스스로의 기준으로 내일의 문을 여는 단단한 결심이 자라납니다.',
+            resonanceDelta: 23,
+          },
+        },
+      ],
+      climaxHook:
+        '“사람들에게는 그들만의 모순이 있다.” 마지막 장을 덮는 순간 한 편의 짙은 영화를 본 듯한 여운이 오래도록 남습니다.',
+    },
+  },
+  {
+    id: 'curated-alchemist',
+    title: '연금술사',
+    author: '파울로 코엘료',
+    genre: '모험 철학 우화',
+    dungeonName: '이집트 피라미드로 향하는 황금 사막',
+    dungeonRank: 'Lv.1 산책로',
+    difficultyScore: 32,
+    estimatedHours: 4,
+    pages: 252,
+    moodTags: ['여행', '희망', '모험'],
+    moodMatchReason:
+      '반복되는 일상에 지쳐 어딘가로 훌쩍 떠나고 싶거나, 잊고 있던 내 마음의 나침반을 다시 확인하고 싶을 때 가볍지만 깊이 있는 응원을 건넵니다.',
+    stats: {
+      immersion: 85,
+      depth: 78,
+      lexicon: 34,
+      resonance: 86,
+    },
+    bossChallenge: {
+      name: '안주하려는 마음과 실패의 두려움',
+      description: '안정된 양치기 생활을 뒤로하고 사막의 모래바람 속으로 발을 내딛는 용기가 가장 큰 관문입니다.',
+    },
+    recommendedBuff: '상쾌한 바람 + 여행 플레이리스트 (모험심 +25%)',
+    coverTheme: 'dream',
+    relicReward: {
+      name: '우림과 툼밈의 두 돌',
+      iconType: 'compass',
+      quote: '무언가를 간절히 원할 때 온 우주는 자네의 소망이 실현되도록 도와준다네.',
+    },
+    plotQuest: {
+      prologue:
+        '안달루시아의 젊은 양치기 산티아고는 이집트 피라미드 부근에 보물이 숨겨져 있다는 꿈을 두 번이나 꾼 뒤, 늙은 왕의 조언을 따라 낯선 사막으로 향합니다.',
+      stages: [
+        {
+          prompt: '타리파 항구에서 전 재산을 사기당해 낯선 이방인이 된 순간, 어떻게 하겠습니까?',
+          choiceA: {
+            label: '크리스탈 가게에서 일하며 다시 사막을 건널 여비와 표식을 모은다',
+            outcome:
+              '돌아가는 듯 보였던 시간 속에서 세상의 언어를 읽는 인내와 지혜가 단단하게 쌓여갑니다.',
+            resonanceDelta: 23,
+          },
+          choiceB: {
+            label: '사막을 건너는 대상단에 합류해 오아시스의 바람 소리에 귀를 기울인다',
+            outcome:
+              '모래언덕 너머로 반짝이는 별빛 아래, 두려움을 넘어서는 여행자의 시야가 활짝 열립니다.',
+            resonanceDelta: 24,
+          },
+        },
+        {
+          prompt: '오아시스에서 운명적인 만남을 마주한 산티아고에게 연금술사가 "자네의 자아의 신화를 끝까지 걸어가라"고 말합니다.',
+          choiceA: {
+            label: '사랑하는 마음이 발목을 잡지 않고 오히려 날개가 됨을 믿고 나아간다',
+            outcome:
+              '모래바람 속에서 만물의 영혼과 대화하는 경이로운 순간이 당신의 걸음을 이끕니다.',
+            resonanceDelta: 26,
+          },
+          choiceB: {
+            label: '잠시 멈춰 서서 지금껏 걸어온 발자국 자체가 이미 보물이 아녔는지 묻는다',
+            outcome:
+              '여정의 끝에서 마주할 놀라운 반전을 향해 마음이 서서히 뜨거워집니다.',
+            resonanceDelta: 23,
+          },
+        },
+      ],
+      climaxHook:
+        '먼 사막을 건너온 소년이 마침내 보물의 자리에서 깨닫게 된 진실은 무엇이었을까요? 오늘의 작은 출발선이 펼쳐집니다.',
+    },
+  },
+  {
+    id: 'curated-siddhartha',
+    title: '싯다르타',
+    author: '헤르만 헤세',
+    genre: '명상 철학 소설',
+    dungeonName: '모든 목소리가 겹쳐 흐르는 강가',
+    dungeonRank: 'Lv.3 심해 유적',
+    difficultyScore: 62,
+    estimatedHours: 5,
+    pages: 216,
+    moodTags: ['고요함', '명상', '내면의 평화'],
+    moodMatchReason:
+      '마음속 소음이 너무 크고 조급함이 밀려올 때, 도도히 흐르는 강물처럼 삶의 모든 순간을 고요히 바라보는 법을 일깨워 줍니다.',
+    stats: {
+      immersion: 72,
+      depth: 95,
+      lexicon: 64,
+      resonance: 90,
+    },
+    bossChallenge: {
+      name: '탐욕과 집착의 세속 윤회',
+      description: '지식도 부유함도 아닌, 오직 직접 부딪혀 겪어낸 상처 끝에서만 들려오는 강물의 소리를 기다려야 합니다.',
+    },
+    recommendedBuff: '따뜻한 녹차 + 장작 타는 소리 (평온함 +28%)',
+    coverTheme: 'solitude',
+    relicReward: {
+      name: '뱃사공 바주데바의 노',
+      iconType: 'hourglass',
+      quote: '시간이란 존재하지 않는다. 강물은 언제나 모든 곳에 동시에 존재한다.',
+    },
+    plotQuest: {
+      prologue:
+        '총명한 바라문의 아들 싯다르타는 경전의 가르침만으로는 진정한 평화에 닿을 수 없음을 깨닫고, 친구 고빈다와 함께 모든 것을 버린 채 길 위로 나섭니다.',
+      stages: [
+        {
+          prompt: '유명한 스승의 설법을 들은 뒤에도 싯다르타는 "누구에게도 구원을 배울 수 없다"며 홀로 떠나려 합니다.',
+          choiceA: {
+            label: '스승의 그림자에서 벗어나 나만의 감각으로 세상을 직접 겪어보기로 한다',
+            outcome:
+              '머리로 아는 지식이 아니라 피부로 부딪히는 살아있는 삶의 호흡이 비로소 시작됩니다.',
+            resonanceDelta: 24,
+          },
+          choiceB: {
+            label: '도시로 내려가 부와 사랑이라는 세속의 세계 한복판으로 걸어 들어간다',
+            outcome:
+              '화려함 뒤에 찾아오는 공허함마저 깨달음을 위한 필연적인 통과 의례가 됩니다.',
+            resonanceDelta: 22,
+          },
+        },
+        {
+          prompt: '세월이 흘러 지친 몸으로 다시 강가에 선 당신에게 늙은 뱃사공이 말없이 물결을 가리킵니다.',
+          choiceA: {
+            label: '아무 판단 없이 흐르는 물의 수많은 목소리를 가만히 경청한다',
+            outcome:
+              '기쁨과 슬픔, 과거와 미래가 하나의 잔잔한 화음으로 합쳐지는 신비로운 고요가 찾아옵니다.',
+            resonanceDelta: 28,
+          },
+          choiceB: {
+            label: '물 위에 비친 자신의 주름진 얼굴에서 아버지와 아들의 얼굴을 겹쳐 본다',
+            outcome:
+              '모든 고통과 방황을 따뜻하게 감싸 안는 깊은 연민의 빛이 조용히 번져갑니다.',
+            resonanceDelta: 26,
+          },
+        },
+      ],
+      climaxHook:
+        '바닥 없는 방황 끝에 강물 앞에서 비로소 미소 짓게 된 싯다르타—지친 마음을 물처럼 씻어내리는 가장 아름다운 명상록입니다.',
+    },
+  },
+  {
+    id: 'curated-pachinko',
+    title: '파친코',
+    author: '이민진',
+    genre: '역사 대서사시',
+    dungeonName: '현해탄을 건넌 사대의 바다',
+    dungeonRank: 'Lv.3 심해 유적',
+    difficultyScore: 64,
+    estimatedHours: 14,
+    pages: 720,
+    moodTags: ['대서사', '가족', '강인한 생명력'],
+    moodMatchReason:
+      '잠깐의 기분 전환보다 한 시대를 관통하는 거대한 서사에 푹 빠져, 모진 풍파 속에서도 꺾이지 않는 삶의 강인함을 느끼고 싶을 때 압도적인 몰입을 줍니다.',
+    stats: {
+      immersion: 92,
+      depth: 88,
+      lexicon: 52,
+      resonance: 96,
+    },
+    bossChallenge: {
+      name: '4대에 걸친 역사의 거센 파도',
+      description: '묵직한 분량과 시대의 비극 앞에서도 하루하루를 성실히 살아내는 인물들의 숨결을 끝까지 따라가는 여정입니다.',
+    },
+    recommendedBuff: '넉넉한 주말 오후 + 따뜻한 보리차 (서사 지구력 +25%)',
+    coverTheme: 'labyrinth',
+    relicReward: {
+      name: '영도 하숙집의 백자 쌀항아리',
+      iconType: 'lantern',
+      quote: '역사가 우리를 망쳐놨지만 그래도 상관없다.',
+    },
+    plotQuest: {
+      prologue:
+        '20세기 초 부산 영도 바닷가, 가난하지만 단단한 하숙집 딸 선자는 낯선 이방인 한수를 만나면서 자신과 후손의 운명을 송두리째 바꾸는 거친 파도 속으로 걸어 들어갑니다.',
+      stages: [
+        {
+          prompt: '고향을 떠나 낯선 오사카의 땅을 밟아야 하는 기로에 섰습니다. 무엇을 붙잡고 버텨내겠습니까?',
+          choiceA: {
+            label: '비바람이 몰아쳐도 가족에게 따뜻한 밥 한 끼를 지어 올리는 성실함',
+            outcome:
+              '거창한 영웅담보다 강한 평범한 사람들의 존엄이 페이지마다 묵직하게 빛납니다.',
+            resonanceDelta: 26,
+          },
+          choiceB: {
+            label: '차별과 가난의 한복판에서도 다음 세대의 미래만큼은 지켜내려는 결의',
+            outcome:
+              '세대에서 세대로 이어지는 사랑과 희생의 맥박이 가슴 깊숙이 울려 퍼집니다.',
+            resonanceDelta: 25,
+          },
+        },
+        {
+          prompt: '어지럽게 튕기는 파친코 구슬처럼 예측할 수 없는 운명 앞에서, 인물은 삶의 선택을 내려야 합니다.',
+          choiceA: {
+            label: '시대가 강요한 낙인을 거부하고 스스로의 이름과 자존을 세운다',
+            outcome:
+              '비극을 이겨내는 인간 본연의 단단한 힘이 거대한 파도처럼 밀려옵니다.',
+            resonanceDelta: 27,
+          },
+          choiceB: {
+            label: '서로 다른 상처를 품은 가족들의 진심이 엇갈리고 만나는 순간을 응시한다',
+            outcome:
+              '수백 페이지가 순식간에 넘어가는 압도적인 가독성과 벅찬 여운을 경험합니다.',
+            resonanceDelta: 24,
+          },
+        },
+      ],
+      climaxHook:
+        '700쪽이 넘는 분량조차 아쉽게 느껴질 만큼 숨 쉴 틈 없이 펼쳐지는 네 세대의 대서사시—지금 영도 바닷가의 문을 열어보세요.',
+    },
+  },
+  {
+    id: 'curated-crime-and-punishment',
+    title: '죄와 벌',
+    author: '표도르 도스토옙스키',
+    genre: '심리 추리 고전',
+    dungeonName: '상트페테르부르크의 열병 앓는 다락방',
+    dungeonRank: 'Lv.4 바벨의 탑',
+    difficultyScore: 93,
+    estimatedHours: 16,
+    pages: 780,
+    moodTags: ['치열한 사유', '심리 스릴러', '묵직함'],
+    moodMatchReason:
+      '안이한 위로를 넘어 인간 내면의 가장 어두운 심연과 구원의 가능성을 끝까지 파고드는 압도적인 지적·심리적 대결을 원할 때 도전할 가치가 있는 거대한 봉우리입니다.',
+    stats: {
+      immersion: 84,
+      depth: 99,
+      lexicon: 86,
+      resonance: 94,
+    },
+    bossChallenge: {
+      name: '예심 판사 포르피리와의 숨 막히는 심리전',
+      description: '초인 사상의 오만과 흔들리는 양심 사이에서 라스콜니코프가 겪는 극한의 열병을 함께 견뎌내야 합니다.',
+    },
+    recommendedBuff: '진한 홍차 + 밤새 집중할 수 있는 조용한 서재 (지적 몰입 +30%)',
+    coverTheme: 'labyrinth',
+    relicReward: {
+      name: '다락방 문틈의 구리 십자가',
+      iconType: 'key',
+      quote: '고통과 괴로움은 크나큰 자의식과 깊은 마음을 지닌 인간에게 언제나 필연적이다.',
+    },
+    plotQuest: {
+      prologue:
+        '무더운 여름 상트페테르부르크의 관처럼 좁은 다락방, 가난한 법학도 라스콜니코프는 "비범한 인간은 도덕을 넘을 수 있다"는 위험한 이론에 사로잡혀 돌이킬 수 없는 문턱에 섭니다.',
+      stages: [
+        {
+          prompt: '사건 이후 극도의 열병과 편집증에 시달리던 당신 앞에, 날카로운 눈빛의 예심 판사 포르피리가 미소 지으며 말을 걸어옵니다.',
+          choiceA: {
+            label: '논리와 지적 오만으로 판사의 유도 심문을 한 치의 빈틈없이 방어한다',
+            outcome:
+              '숨 막히는 두뇌 싸움이 시작되지만, 내면의 균열 소리는 오히려 더 크게 들려옵니다.',
+            resonanceDelta: 25,
+          },
+          choiceB: {
+            label: '가장 낮은 자리에서 순수한 연민으로 손을 내미는 소냐의 눈빛을 마주한다',
+            outcome:
+              '차가운 이성의 탑이 조금씩 흔들리며 인간적인 떨림이 마음 깊은 곳을 두드립니다.',
+            resonanceDelta: 27,
+          },
+        },
+        {
+          prompt: '비밀을 지켜낼 것인가, 아니면 스스로 무너진 양심 앞에 무릎을 꿇을 것인가—최후의 기로가 다가옵니다.',
+          choiceA: {
+            label: '모든 논리를 내려놓고 진실의 무게를 정면으로 받아들인다',
+            outcome:
+              '광기와 죄책감의 긴 터널 끝에 서늘하면서도 눈부신 재생의 새벽빛이 비칩니다.',
+            resonanceDelta: 28,
+          },
+          choiceB: {
+            label: '인간이 왜 스스로를 속이고 또 용서받으려 하는지 끝까지 응시한다',
+            outcome:
+              '문학사상 가장 정교하고 강렬한 심리 드라마가 머릿속에 깊은 각인을 남깁니다.',
+            resonanceDelta: 26,
+          },
+        },
+      ],
+      climaxHook:
+        '죄를 지은 자가 스스로에게 내리는 가장 잔인한 벌, 그리고 그 너머에서 기다리는 뜻밖의 구원—고전의 거대한 심연으로 들어가 보세요.',
+    },
+  },
+];
+
+export interface StaticMatchOptions {
+  customNote?: string;
+  presetLabel?: string;
+  excludeTitles?: string[];
+}
+
+const KEYWORD_CLUSTERS: { triggers: string[]; matches: string[] }[] = [
+  {
+    triggers: ['비', '우울', '쓸쓸', '슬픔', '눈물', '외로', '상실', '서늘'],
+    matches: ['비 오는 밤', '쓸쓸함', '정교한 문장', '그리움', '감정 파동', '위로'],
+  },
+  {
+    triggers: ['위로', '지침', '피곤', '피로', '번아웃', '휴식', '잠', '밤', '따뜻', '힐링', '쉬고'],
+    matches: ['위로', '따뜻함', '따뜻한 위로', '휴식', '여유 회복', '몽환', '번아웃'],
+  },
+  {
+    triggers: ['sf', '우주', '미래', '과학', '상상', '환상', '미궁', '판타지'],
+    matches: ['서정 sf', '환상', '미궁', '몽환', '불가사의', '판타지', '힐링 판타지'],
+  },
+  {
+    triggers: ['추리', '미스터리', '긴장', '스릴러', '사건', '범인'],
+    matches: ['미스터리', '긴장감', '심리 스릴러', '몰입', '추리'],
+  },
+  {
+    triggers: ['철학', '사색', '고민', '인생', '방황', '명상', '본질', '성장', '청춘'],
+    matches: ['사색', '철학', '방황', '성장', '내면의 변화', '명상', '인생 사색', '성찰'],
+  },
+  {
+    triggers: ['모험', '여행', '떠나', '바다', '자유', '도전', '결의'],
+    matches: ['모험', '여행', '희망', '투지', '조용한 결의'],
+  },
+  {
+    triggers: ['가볍', '웃음', '유쾌', '편안', '짧', '술술'],
+    matches: ['가벼운 웃음', '빠른 몰입', '일상 힐링'],
+  },
+  {
+    triggers: ['묵직', '대서사', '고전', '깊이', '역사', '지적'],
+    matches: ['지적 자극', '치열한 사유', '대서사', '묵직함', '지적 각성', '고전'],
+  },
 ];
 
 export function getMoodMatchedCuratedQuests(
   energy: number,
   warmth: number,
   stamina: ReadingStamina,
-  count = 3
+  count = 3,
+  options: StaticMatchOptions = {}
 ): BookQuest[] {
   const targetDifficulty =
     stamina === 'light' ? 30 : stamina === 'balanced' ? 54 : 82;
+
+  const noteLower = (options.customNote ?? '').trim().toLowerCase();
+  const presetLower = (options.presetLabel ?? '').trim().toLowerCase();
+  const excludeSet = new Set(
+    (options.excludeTitles ?? []).map((t) => t.trim().toLowerCase()).filter(Boolean)
+  );
+
+  // Extract semantic boosts from user's note & preset
+  const semanticTokens: string[] = [];
+  if (noteLower) {
+    semanticTokens.push(
+      ...noteLower
+        .split(/[\s,./!?"'()]+/)
+        .map((w) => w.trim())
+        .filter((w) => w.length >= 2)
+    );
+    for (const cluster of KEYWORD_CLUSTERS) {
+      if (cluster.triggers.some((trig) => noteLower.includes(trig))) {
+        semanticTokens.push(...cluster.matches);
+      }
+    }
+  }
+  if (presetLower) {
+    for (const cluster of KEYWORD_CLUSTERS) {
+      if (cluster.triggers.some((trig) => presetLower.includes(trig))) {
+        semanticTokens.push(...cluster.matches);
+      }
+    }
+  }
 
   const scored = CURATED_QUESTS.map((q) => {
     const warmthScore = 100 - Math.abs(warmth - q.stats.resonance);
     const energyScore = 100 - Math.abs(energy - q.stats.immersion);
     const diffScore = 100 - Math.abs(targetDifficulty - q.difficultyScore);
-    const total = warmthScore * 0.4 + energyScore * 0.35 + diffScore * 0.25;
+    let total = warmthScore * 0.38 + energyScore * 0.34 + diffScore * 0.28;
+
+    if (semanticTokens.length > 0) {
+      const searchable = `${q.title} ${q.author} ${q.genre} ${q.moodTags.join(' ')} ${q.moodMatchReason}`.toLowerCase();
+      let keywordHits = 0;
+      for (const token of semanticTokens) {
+        if (searchable.includes(token.toLowerCase())) {
+          keywordHits += 1;
+        }
+      }
+      total += Math.min(28, keywordHits * 7);
+    }
+
     return { quest: q, score: total };
   });
 
   scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, count).map((entry) => entry.quest);
+
+  const nonExcluded = scored
+    .filter((entry) => !excludeSet.has(entry.quest.title.trim().toLowerCase()))
+    .map((entry) => entry.quest);
+
+  if (nonExcluded.length >= count) {
+    return nonExcluded.slice(0, count);
+  }
+
+  const fallbackPool = scored
+    .filter((entry) => !nonExcluded.some((picked) => picked.id === entry.quest.id))
+    .map((entry) => entry.quest);
+
+  return [...nonExcluded, ...fallbackPool].slice(0, count);
 }
+
+export function buildStaticMoodSummary(params: {
+  presetLabel: string;
+  energy: number;
+  warmth: number;
+  stamina: ReadingStamina;
+  customNote: string;
+}): string {
+  const note = params.customNote.trim();
+  const tone =
+    params.warmth >= 70
+      ? '다정한 온기와 위로가 스며드는'
+      : params.warmth <= 35
+        ? '서늘하고 또렷한 사유가 살아있는'
+        : '감정과 사색의 균형이 잘 잡힌';
+  const pace =
+    params.stamina === 'light'
+      ? '부담 없이 펼칠 수 있는'
+      : params.stamina === 'epic'
+        ? '깊이 몰입해 도전할 만한'
+        : '호흡을 따라 천천히 빠져드는';
+
+  if (note) {
+    return `“${note}”의 결에 맞춰 ${tone} ${pace} 문학 퀘스트 3장을 꺼냈습니다.`;
+  }
+  return `「${params.presetLabel}」 상태에 맞춰 ${tone} ${pace} 퀘스트 3장을 봉인에서 꺼냈습니다.`;
+}
+
 

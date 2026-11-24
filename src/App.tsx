@@ -27,6 +27,7 @@ import {
   CURATED_QUESTS,
   HERO_TABLETOP_IMAGE,
   MOOD_PRESETS,
+  buildStaticMoodSummary,
   getMoodMatchedCuratedQuests,
   getReaderRank,
 } from './data/curatedQuests';
@@ -42,6 +43,7 @@ import {
 import { soundFx } from './utils/sound';
 
 const STORAGE_KEY = 'bookquest_progress_v2';
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 const DEFAULT_PROGRESS: PlayerProgress = {
   xp: 0,
@@ -106,6 +108,9 @@ export default function App() {
   const [moodSummary, setMoodSummary] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [backendStatus, setBackendStatus] = useState<
+    'checking' | 'connected' | 'static'
+  >('checking');
 
   const [diceValue, setDiceValue] = useState<number | null>(null);
   const [isRollingDice, setIsRollingDice] = useState<boolean>(false);
@@ -169,6 +174,35 @@ export default function App() {
     const timer = window.setTimeout(() => setToastMessage(null), 3000);
     return () => window.clearTimeout(timer);
   }, [toastMessage]);
+
+  const checkBackendAvailable = useCallback(async (): Promise<boolean> => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 2500);
+    try {
+      const res = await fetch(`${API_BASE}/api/health`, {
+        method: 'GET',
+        signal: controller.signal,
+      });
+      const contentType = res.headers.get('content-type') || '';
+      if (!res.ok || !contentType.includes('application/json')) {
+        setBackendStatus('static');
+        return false;
+      }
+      const data = (await res.json()) as { ok?: boolean };
+      const available = data?.ok === true;
+      setBackendStatus(available ? 'connected' : 'static');
+      return available;
+    } catch {
+      setBackendStatus('static');
+      return false;
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+  }, []);
+
+  useEffect(() => {
+    void checkBackendAvailable();
+  }, [checkBackendAvailable]);
 
   // Sync ambient rain cleanup
   useEffect(() => {
@@ -314,9 +348,13 @@ export default function App() {
         mood.energy,
         mood.warmth,
         mood.stamina,
-        3
+        3,
+        {
+          customNote: mood.customNote,
+          presetLabel: mood.presetLabel,
+        }
       ),
-    [mood.energy, mood.warmth, mood.stamina]
+    [mood.energy, mood.warmth, mood.stamina, mood.customNote, mood.presetLabel]
   );
 
   const bestCuratedMatch = matchedCuratedQuests[0] ?? CURATED_QUESTS[0];
@@ -362,8 +400,52 @@ export default function App() {
     setApiError(null);
     soundFx.cardDraw(progress.soundEnabled);
 
+    const dealStaticMoodCards = () => {
+      const matched = getMoodMatchedCuratedQuests(
+        mood.energy,
+        mood.warmth,
+        mood.stamina,
+        3,
+        {
+          customNote: mood.customNote,
+          presetLabel: mood.presetLabel,
+          excludeTitles,
+        }
+      );
+
+      setMoodSummary(buildStaticMoodSummary(mood));
+      setAiQuests(matched);
+      setRevealedIds([]);
+      setDiceQuest(null);
+      setProgress((prev) => ({
+        ...prev,
+        aiRequestCount: prev.aiRequestCount + 1,
+      }));
+      soundFx.questClear(progress.soundEnabled);
+      pushFloatingEffect('퀘스트 카드 3장 도착!', 'victory');
+      showToast('봉인된 퀘스트 카드 3장이 도착했습니다. 카드를 열어보세요!');
+      awardAchievement('first-mood-oracle');
+
+      window.setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    };
+
     try {
-      const response = await fetch('/api/recommend', {
+      const hasBackend =
+        backendStatus === 'connected'
+          ? true
+          : backendStatus === 'static'
+            ? false
+            : await checkBackendAvailable();
+
+      if (!hasBackend) {
+        await new Promise((resolve) => window.setTimeout(resolve, 260));
+        dealStaticMoodCards();
+        return;
+      }
+
+      const response = await fetch(`${API_BASE}/api/recommend`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -378,18 +460,18 @@ export default function App() {
 
       const rawBody = await response.text();
       if (response.status === 404 || response.status === 405) {
-        throw new Error(
-          '정적 호스팅(GitHub Pages 등) 환경에서는 백엔드 AI 추천 API가 실행되지 않습니다. 아래의 실시간 기분 매칭 큐레이션 퀘스트를 바로 플레이해 보세요.'
-        );
+        setBackendStatus('static');
+        dealStaticMoodCards();
+        return;
       }
 
       let data: { error?: string; moodSummary?: string; quests?: BookQuest[] } = {};
       try {
         data = rawBody ? JSON.parse(rawBody) : {};
       } catch {
-        throw new Error(
-          `백엔드 API 응답이 올바르지 않습니다 (HTTP ${response.status}). 정적 호스팅 환경이라면 아래 큐레이션 퀘스트를 이용해 주세요.`
-        );
+        setBackendStatus('static');
+        dealStaticMoodCards();
+        return;
       }
 
       if (!response.ok) {
@@ -1007,7 +1089,11 @@ export default function App() {
                         ) : (
                           <>
                             <Sparkles className="w-4 h-4" aria-hidden="true" />
-                            <span>AI 기분 맞춤 퀘스트 받기</span>
+                            <span>
+                              {backendStatus === 'static'
+                                ? '기분 맞춤 카드 3장 뽑기'
+                                : 'AI 기분 맞춤 퀘스트 받기'}
+                            </span>
                           </>
                         )}
                       </button>
@@ -1194,7 +1280,7 @@ export default function App() {
                       onClick={() => handleSwitchTab('catalog')}
                       className="px-4 py-2 text-xs font-medium rounded-lg border border-[#F5F1E6]/20 bg-[#15241E] text-[#FAF7F0] hover:border-amber-400/60 transition-colors cursor-pointer whitespace-nowrap"
                     >
-                      전체 도감 12권 보기
+                      전체 도감 {CURATED_QUESTS.length}권 보기
                     </button>
                   </div>
 
